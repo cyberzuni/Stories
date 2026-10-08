@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolsWebsiteAI - Free Text Converter & Password Generator</title>
+    <meta name="description" content="Easily convert text cases and generate strong, secure passwords with ToolsWebsiteAI. Free, lightning-fast, and 100% private online web tools.">
+    
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --primary: #4338ca; /* Darker indigo for high contrast (passes WCAG AAA) */
+            --primary-hover: #3730a3;
+            --text-main: #0f172a;
+            --text-muted: #334155; /* Dark slate for high contrast */
+            --border: #cbd5e1;
+            --danger: #b91c1c; /* High contrast red */
+            --radius: 10px;
+            --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            padding: 1.5rem 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        
+        header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        /* Main Landmark Container */
+        main.container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: #e2e8f0;
+            padding: 6px;
+            border-radius: var(--radius);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #1e293b; /* High contrast */
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--card-bg);
+            color: var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        /* Tool Sections */
+        .tool-section {
+            display: none;
+            background: var(--card-bg);
+            padding: 1.75rem;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.07);
+            border: 1px solid var(--border);
+        }
+
+        .tool-section.active {
+            display: block;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            font-size: 1.35rem;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Inputs & Controls */
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            color: var(--text-main);
+            resize: vertical;
+            margin-bottom: 12px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-bottom: 1.25rem;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: var(--font-main);
+        }
+
+        .btn-case {
+            background: #f1f5f9;
+            border: 1px solid #94a3b8;
+            color: #0f172a;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .btn-case:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+        
+        .btn-danger {
+            background: #ffffff;
+            color: var(--danger);
+            border: 2px solid var(--danger);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .btn-danger:hover {
+            background: #fef2f2;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Password Tool Elements */
+        .pwd-display {
+            background: #f1f5f9;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .pwd-display span {
+            font-size: 1.35rem;
+            font-family: monospace;
+            font-weight: 700;
+            color: var(--text-main);
+            word-break: break-all;
+        }
+
+        .pwd-copy {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .pwd-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .control-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .flex-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .w-100 { width: 100%; }
+
+        /* Toast Alert */
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #0f172a;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .checkbox-group { grid-template-columns: 1fr; }
+            .flex-actions { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ToolsWebsiteAI</h1>
+        <p>Fast, Secure & Free Online Utilities</p>
+    </header>
+
+    <!-- Main landmark for Accessibility requirement -->
+    <main class="container">
+        
+        <!-- Tabs -->
+        <div class="tabs" role="tablist">
+            <button class="tab-btn active" id="tab-text" role="tab" aria-selected="true" onclick="switchTab('text')">Text Converter</button>
+            <button class="tab-btn" id="tab-pass" role="tab" aria-selected="false" onclick="switchTab('pass')">Password Generator</button>
+        </div>
+
+        <!-- Tool 1: Text Converter -->
+        <section class="tool-section active" id="tool-text" aria-labelledby="tab-text">
+            <h2>Text Formatter & Case Converter</h2>
+            
+            <div class="stats-bar" aria-live="polite">
+                <span id="char-count">Characters: 0</span>
+                <span id="word-count">Words: 0</span>
+            </div>
+
+            <textarea id="text-input" aria-label="Text to format" placeholder="Type or paste text here..."></textarea>
+            
+            <div class="btn-grid">
+                <button class="btn-case" onclick="changeCase('upper')">UPPERCASE</button>
+                <button class="btn-case" onclick="changeCase('lower')">lowercase</button>
+                <button class="btn-case" onclick="changeCase('title')">Title Case</button>
+                <button class="btn-case" onclick="changeCase('sentence')">Sentence case</button>
+            </div>
+
+            <div class="flex-actions">
+                <button class="btn-primary" onclick="copyText()">Copy Text</button>
+                <button class="btn-danger" onclick="clearText()">Clear Input</button>
+            </div>
+        </section>
+
+        <!-- Tool 2: Password Generator -->
+        <section class="tool-section" id="tool-pass" aria-labelledby="tab-pass">
+            <h2>Secure Password Generator</h2>
+            
+            <div class="pwd-display">
+                <span id="pwd-result" aria-live="polite">Click Generate...</span>
+                <button class="pwd-copy" aria-label="Copy Generated Password" onclick="copyPassword()">Copy</button>
+            </div>
+
+            <div class="pwd-controls">
+                <div class="control-group">
+                    <label for="pwd-length">Password Length: <span id="length-val">16</span></label>
+                    <input type="range" id="pwd-length" min="8" max="64" value="16" oninput="updateLength(this.value)">
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="checkbox-item" for="chk-upper">
+                        <input type="checkbox" id="chk-upper" checked> Uppercase (A-Z)
+                    </label>
+                    <label class="checkbox-item" for="chk-lower">
+                        <input type="checkbox" id="chk-lower" checked> Lowercase (a-z)
+                    </label>
+                    <label class="checkbox-item" for="chk-number">
+                        <input type="checkbox" id="chk-number" checked> Numbers (0-9)
+                    </label>
+                    <label class="checkbox-item" for="chk-symbol">
+                        <input type="checkbox" id="chk-symbol" checked> Symbols (!@#$)
+                    </label>
+                </div>
+
+                <button class="btn-primary w-100" onclick="generatePassword()">Generate Secure Password</button>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="toast" class="toast">Action completed!</div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
+            
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            activeBtn.classList.add('active');
+            activeBtn.setAttribute('aria-selected', 'true');
+            document.getElementById(`tool-${tabId}`).classList.add('active');
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2500);
+        }
+
+        const textInput = document.getElementById('text-input');
+        textInput.addEventListener('input', () => {
+            const txt = textInput.value;
+            document.getElementById('char-count').innerText = `Characters: ${txt.length}`;
+            const words = txt.trim().split(/\s+/).filter(w => w.length > 0);
+            document.getElementById('word-count').innerText = `Words: ${words.length}`;
+        });
+
+        function changeCase(type) {
+            let val = textInput.value;
+            if(!val) return showToast('Please enter text first');
+            if(type === 'upper') textInput.value = val.toUpperCase();
+            if(type === 'lower') textInput.value = val.toLowerCase();
+            if(type === 'title') textInput.value = val.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+            if(type === 'sentence') textInput.value = val.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g, c => c.toUpperCase());
+            showToast('Text converted!');
+        }
+
+        function copyText() {
+            if(!textInput.value) return showToast('Nothing to copy!');
+            navigator.clipboard.writeText(textInput.value).then(() => showToast('Copied to clipboard!'));
+        }
+
+        function clearText() {
+            textInput.value = '';
+            document.getElementById('char-count').innerText = 'Characters: 0';
+            document.getElementById('word-count').innerText = 'Words: 0';
+            showToast('Input cleared');
+        }
+
+        function updateLength(val) {
+            document.getElementById('length-val').innerText = val;
+        }
+
+        function generatePassword() {
+            const len = document.getElementById('pwd-length').value;
+            const u = document.getElementById('chk-upper').checked;
+            const l = document.getElementById('chk-lower').checked;
+            const n = document.getElementById('chk-number').checked;
+            const s = document.getElementById('chk-symbol').checked;
+
+            let pool = '';
+            if (u) pool += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (l) pool += 'abcdefghijklmnopqrstuvwxyz';
+            if (n) pool += '0123456789';
+            if (s) pool += '!@#$%^&*()_+~|}{[]:;?><,./-=';
+
+            if (!pool) return showToast('Select at least 1 option!');
+
+            let pass = '';
+            for (let i = 0; i < len; i++) {
+                pass += pool[Math.floor(Math.random() * pool.length)];
+            }
+            document.getElementById('pwd-result').innerText = pass;
+        }
+
+        function copyPassword() {
+            const p = document.getElementById('pwd-result').innerText;
+            if (p === 'Click Generate...') return showToast('Generate password first');
+            navigator.clipboard.writeText(p).then(() => showToast('Password copied!'));
+        }
+
+        generatePassword();
+    </script>
+</body>
+</html>
