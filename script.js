@@ -50,7 +50,7 @@ window.addEventListener('DOMContentLoaded', () => {
 // Fetch from tools.json with fallback
 async function fetchToolsFromJson() {
     const sources = [
-        "https://toolswebsiteai.github.io/tools.json?t=" + Date.now(),
+        "https://themasterai.github.io/tools.json?t=" + Date.now(),
         "tools.json?t=" + Date.now(),
         "./tools.json?t=" + Date.now()
     ];
