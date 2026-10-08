@@ -25,7 +25,14 @@
       "id": 4,
       "title": "Free Online Text Cleaner",
       "description": "Organize raw data, spreadsheets, and structured information seamlessly using AI.",
-      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+      "image": "images/Text Cleaner Logo with Sweeping Sparkles.jpg",
+      "link": "text-cleaner.html"
+    },
+     {
+      "id": 5,
+      "title": "Free Online Text Cleaner",
+      "description": "Organize raw data, spreadsheets, and structured information seamlessly using AI.",
+      "image": "images/Text Cleaner Logo with Sweeping Sparkles.jpg",
       "link": "text-cleaner.html"
     }
   ]
