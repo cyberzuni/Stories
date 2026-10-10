@@ -4,14 +4,14 @@
       "id": 1,
       "title": "AI Article Writer",
       "description": "Smart text options and auto-generating features for professional bloggers and content creators.",
-      "image": "images/Word_Counter_logo.png",
+      "image": "images/ai_article_writer_square_400.png",
       "link": "word-counter.html"
     },
     {
       "id": 2,
       "title": "Free Online Character Counter & Word Count Tool",
       "description": "What is a character counter?</strong> Our free online character counter instantly calculates the total number of characters, words, sentences, and paragraphs in your text. Just paste your content below to get real-time statistics—no signup required.",
-      "image": "images/05e78667-8057-41d3-8092-6efcb886.jpg",
+      "image": "images/Word_Counter_logo.png",
       "link": "Character-Counter.html"
     },
     {
